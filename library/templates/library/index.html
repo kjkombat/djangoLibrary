@@ -1,0 +1,32 @@
+<style>table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%;}
+td, th {border: 1px solid #dddddd;text-align: left;padding: 8px;}
+tr:nth-child(even) {background-color: #dddddd;}</style></head>
+<body>
+<h2> Books in Library</h2>
+<table><tr><th>Book Name</th><th>Author Name</th></tr>
+{% for data in books_query %}
+<tr>
+<td>{{ data.book_name}}</td>
+<td>{{data.author}}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<h2> Books borrowed by students</h2>
+<table><tr><th>Student Name</th><th>Book Name</th></tr>
+{% for data in students_query %}
+<tr>
+<td>{{ data.student_name}}</td>
+<td>{{data.book_id}}</td>
+</tr>
+{% endfor %}
+
+</table>
+<h2>Borrow Book</h2>
+<h3>{{error}}</h3>
+<form method = "POST" action = "{%url 'library:borrow'%} "> 
+	{% csrf_token %}
+	{{ form }}
+	<input type = "submit" value = "borrow" name = "submit">
+</form>
